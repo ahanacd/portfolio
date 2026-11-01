@@ -1,0 +1,176 @@
+<hello class="html"></hello>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ahana Chanda | Writer and cognitive science student</title>
+    <meta
+      name="description"
+      content="Portfolio of Ahana Chanda: published author and English Honours student with Statistics and Chinese minors, building toward cognitive science and UX research."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="top">
+      <span class="logo">Ahana Chanda</span>
+      <button id="theme-toggle" type="button">Dark mode</button>
+    </header>
+
+    <main id="main">
+      <!-- 1. HERO + CHOOSER -->
+      <section class="hero">
+        <h1>Hi, I'm Ahana.</h1>
+        <p id="lead" class="lead">
+          REPLACE: one line about who you are and where you're heading.
+        </p>
+
+        <h2 id="who">Who's visiting?</h2>
+        <div class="choices" role="group" aria-labelledby="who">
+          <button type="button" data-audience="recruiter" aria-pressed="false">
+            Recruiter
+          </button>
+          <button type="button" data-audience="researcher" aria-pressed="false">
+            Researcher
+          </button>
+          <button type="button" data-audience="reader" aria-pressed="false">
+            Reader
+          </button>
+          <button type="button" data-audience="all" aria-pressed="true">
+            Show everything
+          </button>
+        </div>
+        <p id="status" class="status" aria-live="polite">
+          Showing everything. Pick a role to tailor this page.
+        </p>
+      </section>
+
+      <!-- 2. ABOUT (everyone) -->
+      <section class="panel" data-for="recruiter researcher reader">
+        <h2>About me</h2>
+        <p>
+          REPLACE: 80-100 words. Draft facts you can use: second-year BA English
+          (Honours) at Visva-Bharati University (2025-2029), minors in
+          Statistics and Chinese, published a 40,000+ word novel in 2024.
+        </p>
+      </section>
+
+      <!-- 3. RECRUITER -->
+      <section class="panel" data-for="recruiter">
+        <h2>What I can do for your team</h2>
+        <ul>
+          <li>REPLACE: Writing and UX copy. Proof: ...</li>
+          <li>REPLACE: Research synthesis. Proof: ...</li>
+          <li>
+            REPLACE: Tools I actually use (Python, HTML/CSS, Excel...). Only
+            list what you can do.
+          </li>
+        </ul>
+      </section>
+
+      <!-- 4. RESEARCHER -->
+      <section class="panel" data-for="researcher">
+        <h2>Research interests</h2>
+        <p>
+          REPLACE: decision-making, emotion, learning and memory. Mention your
+          Statistics minor and that you completed five online Cambridge courses
+          in cognitive psychology (June-July 2026). Say what you want to learn
+          in a lab.
+        </p>
+      </section>
+
+      <!-- 5. READER -->
+      <section class="panel" data-for="reader">
+        <h2>My novel</h2>
+        <p>
+          REPLACE: 3 sentences about
+          <em>Old Season: and Unchecked Jealousy</em> (published April 2024 by
+          Notion Press under the pen name Joan Fennimore, if you are comfortable
+          linking it to your name).
+        </p>
+        <p>
+          <a href="REPLACE-WITH-REAL-AMAZON-LINK">Find it on Amazon India</a>
+        </p>
+      </section>
+
+      <!-- 6. PROJECTS (cards filter too) -->
+      <section class="panel">
+        <h2>Projects</h2>
+        <div class="cards">
+          <article class="card" data-for="recruiter researcher">
+            <h3>Emotional Intelligence: A Research Synthesis</h3>
+            <span class="tag">Literature review, no original data</span>
+            <p>
+              REPLACE: what you read, what you synthesised, what you added (the
+              India measurement-bias section). Link the PDF only after the
+              methodology and bibliography fixes.
+            </p>
+          </article>
+          <article class="card" data-for="recruiter researcher reader">
+            <h3>This website</h3>
+            <span class="tag">HTML, CSS, JavaScript</span>
+            <p>
+              REPLACE: one or two sentences.
+              <a href="REPLACE-WITH-YOUR-REPO-URL">View the source</a>.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- 7. DESIGN DECISIONS (always visible) -->
+      <section class="panel">
+        <h2>How I designed this page</h2>
+        <p>
+          <strong>Problem.</strong> Recruiters, researchers and readers want
+          different things from one portfolio.
+        </p>
+        <p>
+          <strong>Decision.</strong> A role chooser that tailors the page, with
+          everything visible by default.
+        </p>
+        <p>
+          <strong>Trade-off.</strong> Hiding content would feel cleaner, but
+          visitors might miss things and the page would break without
+          JavaScript.
+        </p>
+        <p>
+          <strong>Accessibility.</strong> Keyboard navigation, readable
+          contrast, a dark mode, and reduced motion for people who want it.
+        </p>
+        <p>
+          <strong>What I'd test next.</strong> Ask five people to find one
+          specific thing and note how long it takes.
+        </p>
+      </section>
+
+      <!-- 8. CONTACT (always visible) -->
+      <section class="panel">
+        <h2>Contact</h2>
+        <p>
+          <a href="mailto:workahanacd25@gmail.com">workahanacd25@gmail.com</a>
+        </p>
+        <p>
+          <a href="https://www.linkedin.com/in/ahana-chanda-410653374"
+            >LinkedIn</a
+          >
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        &copy; 2026 Ahana Chanda. Built by hand with HTML, CSS and JavaScript.
+      </p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
