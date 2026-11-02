@@ -1,12 +1,12 @@
 /* Reader newspaper: cream #F3E6CE, blue ink #0147BA, red #E34F33 (dark text on red for contrast) */
-body.reader { --bg:#F3E6CE; --surface:#F3E6CE; --ink:#0147BA; --muted:#0147BA;
-  --accent:#E34F33; --on-accent:#1b0b08; --line:#0147BA;
+body.reader { --bg:#EBB652; --surface:#EBB652; --ink:#033B55; --muted:#0E65A3;
+  --accent:#F86400; --on-accent:#1b0b08; --line:#0E65A3;
   background-image:radial-gradient(rgba(1,71,186,.09) 1px,transparent 1.3px); background-size:7px 7px; }
 
 .shelf-section { margin:2.2rem 0; }
-.shelf-minds  { --shelf:#0147BA; --spine-text:#F3E6CE; }
-.shelf-lit    { --shelf:#E34F33; --spine-text:#1b0b08; }
-.shelf-makers { --shelf:#F3E6CE; --spine-text:#0147BA; }
+.shelf-minds  { --shelf:#0E65A3; --spine-text:#EBB652; }
+.shelf-lit    { --shelf:#F86400; --spine-text:#1b0b08; }
+.shelf-makers { --shelf:#F79500; --spine-text:#033B55; }
 .shelf-section h2 { font:600 1.5rem Fraunces,Georgia,serif; }
 .shelf-section h2::before { content:""; display:inline-block; width:.8em; height:.8em; margin-right:.5rem;
   background:var(--shelf); border:2px solid var(--ink); }
