@@ -73,3 +73,26 @@ button:hover { background: var(--line); }
   * { animation: none !important; transition: none !important; }
   .reveal { opacity: 1; transform: none; }
 }
+
+/* ---------- Page transitions ---------- */
+/* Content on every inner page rises in, one block after another */
+body:not(.home) main > * { animation: enter .6s ease both; }
+body:not(.home) main > *:nth-child(2) { animation-delay: .08s; }
+body:not(.home) main > *:nth-child(3) { animation-delay: .16s; }
+body:not(.home) main > *:nth-child(4) { animation-delay: .24s; }
+body:not(.home) main > *:nth-child(5) { animation-delay: .32s; }
+body:not(.home) main > *:nth-child(n+6) { animation-delay: .4s; }
+@keyframes enter { from { opacity: 0; transform: translateY(14px); } }
+
+/* The wipe: a circle of the next page's colour grows from the click */
+.curtain { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center;
+  clip-path: circle(0 at var(--x) var(--y)); transition: clip-path .65s cubic-bezier(.7, 0, .2, 1); }
+.curtain.open { clip-path: circle(150% at var(--x) var(--y)); }
+.curtain strong { font: 600 clamp(2.5rem, 12vw, 6rem) Fraunces, Georgia, serif;
+  opacity: 0; transform: translateY(20px); transition: opacity .4s .3s, transform .4s .3s; }
+.curtain.open strong { opacity: 1; transform: none; }
+.curtain .ring { position: absolute; top: 50%; left: 50%; width: 12rem; height: 12rem;
+  margin: -6rem 0 0 -6rem; border: 3px solid var(--ring); border-radius: 50%; opacity: 0; }
+.curtain.open .ring { animation: ring 1.2s ease-out .2s; }
+.curtain.open .r2 { animation-delay: .45s; }
+@keyframes ring { from { opacity: .9; transform: scale(.3); } to { opacity: 0; transform: scale(2.6); } }

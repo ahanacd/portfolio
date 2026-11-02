@@ -65,3 +65,90 @@ document.querySelectorAll(".shelf-section").forEach(function (shelf) {
     });
   });
 });
+
+// Page transitions: a coloured circle wipes across the screen, then the next page loads.
+// Colours match each page's background so the join is seamless.
+const pages = {
+  "index.html": {
+    bg: "#001845",
+    fg: "#ff9f1c",
+    ring: "#eff6ee",
+    word: "Start",
+  },
+  "recruiter.html": {
+    bg: "#83c5be",
+    fg: "#04292e",
+    ring: "#006d77",
+    word: "Recruiter",
+  },
+  "researcher.html": {
+    bg: "#250902",
+    fg: "#f6ede9",
+    ring: "#ad2831",
+    word: "Researcher",
+  },
+  "reader.html": {
+    bg: "#231942",
+    fg: "#e0b1cb",
+    ring: "#9f86c0",
+    word: "Reader",
+  },
+};
+
+function wipe(x, y, page) {
+  const curtain = document.createElement("div");
+  curtain.className = "curtain";
+  curtain.setAttribute("aria-hidden", "true");
+  curtain.style.cssText =
+    "--x:" +
+    x +
+    "px;--y:" +
+    y +
+    "px;--ring:" +
+    page.ring +
+    ";background:" +
+    page.bg +
+    ";color:" +
+    page.fg;
+  const ring1 = document.createElement("span");
+  ring1.className = "ring";
+  const ring2 = document.createElement("span");
+  ring2.className = "ring r2";
+  const word = document.createElement("strong");
+  word.textContent = page.word;
+  curtain.append(ring1, ring2, word);
+  document.body.appendChild(curtain);
+  requestAnimationFrame(function () {
+    requestAnimationFrame(function () {
+      curtain.classList.add("open");
+    });
+  });
+}
+
+document.querySelectorAll("a[href]").forEach(function (link) {
+  const page = pages[link.getAttribute("href")];
+  if (!page) return;
+  link.addEventListener("click", function (e) {
+    if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey)
+      return;
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return; // normal, instant navigation
+    e.preventDefault();
+    const r = link.getBoundingClientRect();
+    wipe(
+      e.clientX || r.left + r.width / 2,
+      e.clientY || r.top + r.height / 2,
+      page,
+    );
+    setTimeout(function () {
+      location.href = link.href;
+    }, 750);
+  });
+});
+
+// If the visitor presses the browser's Back button, clear any leftover wipe.
+window.addEventListener("pageshow", function (e) {
+  if (e.persisted)
+    document.querySelectorAll(".curtain").forEach(function (c) {
+      c.remove();
+    });
+});
