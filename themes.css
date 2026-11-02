@@ -1,0 +1,34 @@
+/* HOME: #001845 #ff9f1c #eff6ee */
+body.home { --bg:#001845; --surface:rgba(239,246,238,.08); --ink:#eff6ee; --muted:#b9c6dc;
+  --accent:#ff9f1c; --on-accent:#001845; --line:rgba(239,246,238,.3); }
+.home .door:hover { background: var(--accent); color: var(--on-accent); }
+.home .door:hover .door-sub { color: var(--on-accent); }
+
+/* RESEARCHER: #250902 #38040e #640d14 #800e13 #ad2831 (plus light text and coral links for readability) */
+body.researcher { --bg:#250902; --surface:#38040e; --ink:#f6ede9; --muted:#e8c9c3;
+  --accent:#ffb4a8; --on-accent:#250902; --line:#ad2831; }
+.researcher .panel { border-color:#640d14; }
+.researcher .courses { background:#640d14; border-color:#ad2831; }   /* coursework colour */
+.researcher .project { background:#800e13; border-color:#ad2831; }   /* project colour */
+.researcher .courses li { margin:.35rem 0; }
+
+/* Motion: soft drifting glows behind the page (CSS only, stops if motion is reduced) */
+.orbs { position:fixed; inset:0; z-index:-1; pointer-events:none; overflow:hidden; }
+.orbs span { position:absolute; width:28rem; height:28rem; border-radius:50%; opacity:.35;
+  background:radial-gradient(circle,#ad2831 0%,transparent 70%); animation:drift 20s ease-in-out infinite alternate; }
+.orbs span:nth-child(1) { top:-8rem; left:-8rem; }
+.orbs span:nth-child(2) { top:30%; right:-10rem; animation-duration:26s;
+  background:radial-gradient(circle,#800e13 0%,transparent 70%); }
+.orbs span:nth-child(3) { bottom:-10rem; left:20%; animation-duration:23s;
+  background:radial-gradient(circle,#640d14 0%,transparent 70%); }
+@keyframes drift { from { transform:translate(0,0) scale(1); } to { transform:translate(4rem,3rem) scale(1.15); } }
+
+/* RECRUITER: #006d77 #83c5be (plus dark teal text) */
+body.recruiter { --bg:#83c5be; --surface:#006d77; --ink:#04292e; --muted:#0a4a50;
+  --accent:#006d77; --on-accent:#ffffff; --line:#006d77; }
+.recruiter a { color:#04292e; }
+.recruiter .panel { color:#ffffff; }
+.recruiter .panel a { color:#ffffff; }
+.recruiter .panel :focus-visible { outline-color:#ffffff; }
+.chips { list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:.6rem; }
+.chips li { background:#83c5be; color:#04292e; font-weight:600; padding:.4rem 1rem; border-radius:999px; }

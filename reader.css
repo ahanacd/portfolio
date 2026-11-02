@@ -1,0 +1,43 @@
+/* Reader page palette: #231942 #5e548e #9f86c0 #be95c4 #e0b1cb */
+body.reader {
+  --bg: #231942; --surface: rgba(94, 84, 142, .28); --ink: #e0b1cb;
+  --muted: #be95c4; --accent: #be95c4; --on-accent: #231942; --line: #5e548e;
+}
+.reader h1 { color: #e0b1cb; }
+
+/* Three section colours */
+.shelf-section { margin: 2.5rem 0; }
+.shelf-minds  { --shelf: #9f86c0; }
+.shelf-lit    { --shelf: #be95c4; }
+.shelf-makers { --shelf: #e0b1cb; }
+.shelf-section h2 { color: var(--shelf); }
+
+/* The rack */
+.rack { list-style: none; margin: 0; padding: 1.8rem 1rem 0; display: flex; flex-wrap: wrap;
+  align-items: flex-end; gap: .45rem; border: 2px solid var(--line);
+  border-bottom: 14px solid var(--line); border-radius: 10px 10px 0 0; }
+.rack li { display: flex; align-items: flex-end; }
+
+/* A book spine (a button, so it works with keyboard and screen readers) */
+.book { writing-mode: vertical-rl; height: var(--h, 13rem); width: 3.2rem; min-height: 0;
+  padding: .7rem .35rem; border: 0; border-radius: 4px 4px 0 0; overflow: hidden;
+  background: var(--shelf); color: #231942; font: 600 .8rem/1.2 Inter, system-ui, sans-serif;
+  text-align: left; cursor: pointer; transform-origin: bottom center;
+  box-shadow: inset -4px 0 0 rgba(35, 25, 66, .25), inset 3px 0 0 rgba(255, 255, 255, .25);
+  transition: transform .35s cubic-bezier(.2, .8, .2, 1);
+  opacity: 0; animation: shelve .5s ease forwards; animation-delay: calc(var(--i, 0) * .12s); }
+.book:hover { background: var(--shelf); transform: translateY(-10px); }
+.book:focus-visible { transform: translateY(-10px); }
+.book[aria-expanded="true"] { transform: translateY(-26px) rotate(-5deg); }
+@keyframes shelve { from { opacity: 0; translate: 0 24px; } to { opacity: 1; translate: 0 0; } }
+
+/* The card that opens when a book is pulled out */
+.detail { margin-top: 1.2rem; padding: 1rem 1.25rem; min-height: 5.5rem; background: var(--surface);
+  border-left: 6px solid var(--shelf); border-radius: 0 var(--radius) var(--radius) 0; }
+.detail > * { animation: fadeup .3s ease; }
+.detail h3 { color: var(--shelf); margin-bottom: .2rem; }
+.detail p { margin: .3rem 0; }
+.hint, .by { color: var(--muted); }
+@keyframes fadeup { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+@media (prefers-reduced-motion: reduce) { .book { opacity: 1; } }

@@ -15,12 +15,12 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="reader.css" />
   </head>
-  <body>
+  <body class="reader">
     <a class="skip" href="#main">Skip to content</a>
     <header class="top">
       <a class="logo" href="index.html">Ahana Chanda</a>
-      <button id="theme-toggle" type="button">Dark mode</button>
     </header>
 
     <main id="main">
@@ -40,68 +40,176 @@
         </p>
       </section>
 
-      <section class="panel">
-        <h2>Books I’d press into your hands</h2>
-        <!-- My starting suggestions. Keep only books you have read, and rewrite every line in your own voice. -->
+      <noscript
+        ><p>Turn on JavaScript to pull the books off the shelves.</p></noscript
+      >
+      <!-- My starting suggestions. Keep only books you have read, and rewrite every data-note in your own voice. -->
 
-        <h3>How minds work</h3>
-        <ul class="books">
+      <section class="shelf-section shelf-minds">
+        <h2>How minds work</h2>
+        <ul class="rack">
           <li>
-            <cite>Thinking, Fast and Slow</cite>
-            <span class="by">by Daniel Kahneman</span><br />Two ways of
-            thinking, and why the fast one fools us.
+            <button
+              type="button"
+              class="book"
+              style="--h: 13rem; --i: 0"
+              aria-expanded="false"
+              aria-controls="detail-minds"
+              data-title="Thinking, Fast and Slow"
+              data-author="Daniel Kahneman"
+              data-note="Two ways of thinking, and why the fast one fools us."
+            >
+              Thinking, Fast and Slow
+            </button>
           </li>
           <li>
-            <cite>How Emotions Are Made</cite>
-            <span class="by">by Lisa Feldman Barrett</span><br />A case that
-            emotions are built by the brain, not simply triggered.
+            <button
+              type="button"
+              class="book"
+              style="--h: 12rem; --i: 1"
+              aria-expanded="false"
+              aria-controls="detail-minds"
+              data-title="How Emotions Are Made"
+              data-author="Lisa Feldman Barrett"
+              data-note="A case that emotions are built by the brain, not simply triggered."
+            >
+              How Emotions Are Made
+            </button>
           </li>
           <li>
-            <cite>Emotional Intelligence</cite>
-            <span class="by">by Daniel Goleman</span><br />Where my own essay on
-            the topic started.
+            <button
+              type="button"
+              class="book"
+              style="--h: 14rem; --i: 2"
+              aria-expanded="false"
+              aria-controls="detail-minds"
+              data-title="Emotional Intelligence"
+              data-author="Daniel Goleman"
+              data-note="Where my own essay on the topic started."
+            >
+              Emotional Intelligence
+            </button>
           </li>
           <li>
-            <cite>The Man Who Mistook His Wife for a Hat</cite>
-            <span class="by">by Oliver Sacks</span><br />Case studies of what
-            happens when a brain works differently.
+            <button
+              type="button"
+              class="book"
+              style="--h: 13.5rem; --i: 3"
+              aria-expanded="false"
+              aria-controls="detail-minds"
+              data-title="The Man Who Mistook His Wife for a Hat"
+              data-author="Oliver Sacks"
+              data-note="Case studies of what happens when a brain works differently."
+            >
+              The Man Who Mistook His Wife for a Hat
+            </button>
           </li>
         </ul>
+        <div class="detail" id="detail-minds" aria-live="polite">
+          <p class="hint">Pick a book from the shelf.</p>
+        </div>
+      </section>
 
-        <h3>Jealousy, love and other mistakes</h3>
-        <ul class="books">
+      <section class="shelf-section shelf-lit">
+        <h2>From a literary freak</h2>
+        <ul class="rack">
           <li>
-            <cite>Othello</cite> <span class="by">by William Shakespeare</span
-            ><br />The classic study of jealousy left unchecked.
+            <button
+              type="button"
+              class="book"
+              style="--h: 12.5rem; --i: 4"
+              aria-expanded="false"
+              aria-controls="detail-lit"
+              data-title="Othello"
+              data-author="William Shakespeare"
+              data-note="The classic study of jealousy left unchecked."
+            >
+              Othello
+            </button>
           </li>
           <li>
-            <cite>Chokher Bali</cite>
-            <span class="by">by Rabindranath Tagore</span><br />Desire and envy
-            inside a household, by the founder of Visva-Bharati.
+            <button
+              type="button"
+              class="book"
+              style="--h: 13.5rem; --i: 5"
+              aria-expanded="false"
+              aria-controls="detail-lit"
+              data-title="Chokher Bali"
+              data-author="Rabindranath Tagore"
+              data-note="Desire and envy inside a household, by the founder of Visva-Bharati."
+            >
+              Chokher Bali
+            </button>
           </li>
           <li>
-            <cite>Normal People</cite> <span class="by">by Sally Rooney</span
-            ><br />Two people who struggle to say what they feel.
+            <button
+              type="button"
+              class="book"
+              style="--h: 12rem; --i: 6"
+              aria-expanded="false"
+              aria-controls="detail-lit"
+              data-title="Normal People"
+              data-author="Sally Rooney"
+              data-note="Two people who struggle to say what they feel."
+            >
+              Normal People
+            </button>
           </li>
           <li>
-            <cite>To Live</cite> <span class="by">by Yu Hua</span><br />A
-            Chinese novel of survival, read here in translation.
+            <button
+              type="button"
+              class="book"
+              style="--h: 14rem; --i: 7"
+              aria-expanded="false"
+              aria-controls="detail-lit"
+              data-title="To Live"
+              data-author="Yu Hua"
+              data-note="A Chinese novel of survival, read here in translation."
+            >
+              To Live
+            </button>
           </li>
         </ul>
+        <div class="detail" id="detail-lit" aria-live="polite">
+          <p class="hint">Pick a book from the shelf.</p>
+        </div>
+      </section>
 
-        <h3>For makers</h3>
-        <ul class="books">
+      <section class="shelf-section shelf-makers">
+        <h2>For makers</h2>
+        <ul class="rack">
           <li>
-            <cite>The Design of Everyday Things</cite>
-            <span class="by">by Don Norman</span><br />Why good design feels
-            invisible and bad design blames you.
+            <button
+              type="button"
+              class="book"
+              style="--h: 13.5rem; --i: 8"
+              aria-expanded="false"
+              aria-controls="detail-makers"
+              data-title="The Design of Everyday Things"
+              data-author="Don Norman"
+              data-note="Why good design feels invisible and bad design blames you."
+            >
+              The Design of Everyday Things
+            </button>
           </li>
           <li>
-            <cite>How to Lie with Statistics</cite>
-            <span class="by">by Darrell Huff</span><br />A short, sharp guide to
-            misleading charts.
+            <button
+              type="button"
+              class="book"
+              style="--h: 12.5rem; --i: 9"
+              aria-expanded="false"
+              aria-controls="detail-makers"
+              data-title="How to Lie with Statistics"
+              data-author="Darrell Huff"
+              data-note="A short, sharp guide to misleading charts."
+            >
+              How to Lie with Statistics
+            </button>
           </li>
         </ul>
+        <div class="detail" id="detail-makers" aria-live="polite">
+          <p class="hint">Pick a book from the shelf.</p>
+        </div>
       </section>
     </main>
 
