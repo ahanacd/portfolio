@@ -4,28 +4,21 @@ body.home { --bg:#001845; --surface:rgba(239,246,238,.08); --ink:#eff6ee; --mute
 .home .door:hover { background: var(--accent); color: var(--on-accent); }
 .home .door:hover .door-sub { color: var(--on-accent); }
 
-/* RESEARCHER: red #c8102e, yellow #f6b300, navy #14213d, blue #1d4e89 */
-body.researcher { --bg:#c8102e; --surface:#14213d; --ink:#ffffff; --muted:#ffe9c2;
-  --accent:#f6b300; --on-accent:#14213d; --line:#f6b300; }
-.researcher a { color:#ffffff; }
-.researcher .panel { border-color:#f6b300; }
-.researcher .panel a { color:#f6b300; }
-.researcher .courses { background:#1d4e89; }                       /* coursework colour */
-.researcher .project { background:#f6b300; color:#14213d; }        /* project colour */
-.researcher .project .card { background:#14213d; color:#ffffff; }
-.researcher .project .card a { color:#f6b300; }
-.researcher .courses li { margin:.35rem 0; }
-
-/* Motion: soft drifting glows behind the page */
-.orbs { position:fixed; inset:0; z-index:-1; pointer-events:none; overflow:hidden; }
-.orbs span { position:absolute; width:28rem; height:28rem; border-radius:50%; opacity:.4;
-  background:radial-gradient(circle,#f6b300 0%,transparent 70%); animation:drift 20s ease-in-out infinite alternate; }
-.orbs span:nth-child(1) { top:-8rem; left:-8rem; }
-.orbs span:nth-child(2) { top:30%; right:-10rem; animation-duration:26s;
-  background:radial-gradient(circle,#14213d 0%,transparent 70%); }
-.orbs span:nth-child(3) { bottom:-10rem; left:20%; animation-duration:23s;
-  background:radial-gradient(circle,#1d4e89 0%,transparent 70%); }
-@keyframes drift { from { transform:translate(0,0) scale(1); } to { transform:translate(4rem,3rem) scale(1.15); } }
+/* RESEARCHER (newspaper): cream #FCE6C4, clay #DB9577, maroon #700B15 */
+body.researcher { --bg:#FCE6C4; --surface:#FCE6C4; --ink:#700B15; --muted:#700B15;
+  --accent:#700B15; --on-accent:#FCE6C4; --line:#700B15;
+  background-image:radial-gradient(rgba(112,11,21,.09) 1px,transparent 1.3px); background-size:7px 7px; }
+.researcher .courses { background:#DB9577; }
+.researcher .project { background:#700B15; color:#FCE6C4; }
+.researcher .project a { color:#FCE6C4; }
+.researcher .courses ul { margin:0; padding-left:1.1rem; }
+.sketch { width:100%; height:auto; color:var(--ink); }
+.desk .arm { transform-origin:36px 100px; animation:type .35s ease-in-out infinite alternate; }
+.desk .scr { animation:blink 2.4s ease-in-out infinite; }
+@keyframes type { to { transform:rotate(-6deg); } }
+.dna { display:block; width:8rem; margin:1rem auto; }
+.rung { stroke:#DB9577; stroke-width:3; transform-box:fill-box; transform-origin:center; animation:twist 2.4s ease-in-out infinite alternate; }
+@keyframes twist { from { transform:scaleX(1); } to { transform:scaleX(.15); } }
 
 /* RECRUITER: #006d77 #83c5be (plus dark teal text) */
 body.recruiter { --bg:#83c5be; --surface:#006d77; --ink:#04292e; --muted:#0a4a50;
@@ -119,3 +112,13 @@ body.home { position:relative; overflow-x:hidden; }
 .w5 { animation-duration:6s; }
 .w6 { animation-duration:9s; animation-direction:reverse; }
 @keyframes roll { from { transform:translateY(0); } to { transform:translateY(-9px); } }
+
+/* ---------- Home: thought cloud and flying pages ---------- */
+.thought { width:10rem; height:auto; margin:-.8rem 0 0 -.8rem; align-self:flex-start; animation:bob2 4s ease-in-out infinite alternate; }
+.thought text { font:italic 17px "Redaction 100",Fraunces,Georgia,serif; fill:#001845; }
+.pages i { position:absolute; left:0; top:var(--t); width:3rem; height:4rem; border-radius:3px; opacity:.85;
+  background:repeating-linear-gradient(#eff6ee 0 .5rem,#b9c6dc .5rem .56rem); box-shadow:0 2px 6px rgba(0,0,0,.35);
+  animation:fly var(--s) linear var(--d) infinite, flutter 1.1s ease-in-out infinite alternate; }
+@keyframes fly { from { translate:-8vw 0; rotate:-15deg; } to { translate:108vw -18vh; rotate:40deg; } }
+@keyframes flutter { to { transform:scaleY(.6) skewX(10deg); } }
+@media (prefers-reduced-motion:reduce) { .pages { display:none; } }

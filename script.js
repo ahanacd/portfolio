@@ -82,15 +82,15 @@ const pages = {
     word: "Recruiter",
   },
   "researcher.html": {
-    bg: "#c8102e",
-    fg: "#ffffff",
-    ring: "#f6b300",
+    bg: "#FCE6C4",
+    fg: "#700B15",
+    ring: "#DB9577",
     word: "Researcher",
   },
   "reader.html": {
-    bg: "#f5ecd7",
-    fg: "#2b0f14",
-    ring: "#c4501e",
+    bg: "#F3E6CE",
+    fg: "#0147BA",
+    ring: "#E34F33",
     word: "Reader",
   },
 };
