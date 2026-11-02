@@ -75,3 +75,28 @@ body.home { position:relative; overflow-x:hidden; }
   .camera, .cup, .dots, .phones { display:none; }
   .guitar { opacity:.35; width:9rem; }
 }
+
+/* ---------- Home: cat with guitar + headphones on the Reader door ---------- */
+.hello { display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap; }
+.hello h1 { margin:0; }
+.cat { width:9.5rem; height:auto; }
+.cat * { transform-box:view-box; }
+.cat .tail { transform-origin:150px 190px; animation:tail 2s ease-in-out infinite alternate; }
+.cat .head { transform-origin:105px 120px; animation:nod 1.2s ease-in-out infinite alternate; }
+.cat .strum { transform-origin:138px 140px; animation:strum .45s ease-in-out infinite alternate; }
+.cat .note { animation:note 3s ease-out infinite; }
+.cat .n2 { animation-delay:1s; } .cat .n3 { animation-delay:2s; }
+@keyframes tail { to { transform:rotate(12deg); } }
+@keyframes nod { from { transform:rotate(-3deg); } to { transform:rotate(3deg); } }
+@keyframes strum { to { transform:rotate(14deg); } }
+@keyframes note { 0% { transform:translate(0,10px); opacity:0; } 20% { opacity:1; } 100% { transform:translate(18px,-50px); opacity:0; } }
+
+.home .doors { margin-top:2.6rem; }
+.home .door { position:relative; }
+.hp { position:absolute; inset:0; pointer-events:none; animation:beat 1.2s ease-in-out infinite; }
+.hp-band { position:absolute; left:-.45rem; right:-.45rem; top:-1.9rem; height:calc(50% + 1.9rem);
+  border:.5rem solid #eff6ee; border-bottom:0; border-radius:50% 50% 0 0 / 3rem 3rem 0 0; }
+.hp-cup { position:absolute; top:50%; width:1.1rem; height:2.6rem; margin-top:-1.3rem;
+  background:#ff9f1c; border:2px solid #eff6ee; border-radius:.5rem; }
+.hp-cup.l { left:-.85rem; } .hp-cup.r { right:-.85rem; }
+@keyframes beat { 50% { transform:scale(1.03); } }
