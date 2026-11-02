@@ -100,3 +100,22 @@ body.home { position:relative; overflow-x:hidden; }
   background:#ff9f1c; border:2px solid #eff6ee; border-radius:.5rem; }
 .hp-cup.l { left:-.85rem; } .hp-cup.r { right:-.85rem; }
 @keyframes beat { 50% { transform:scale(1.03); } }
+
+/* ---------- Home: Redaction 100 heading, speech bubble, moving waves ---------- */
+.hello h1 { font-family:"Redaction 100", Fraunces, Georgia, serif; font-weight:400; font-style:normal;
+  font-size:clamp(2.2rem, 7vw, 3.6rem); }
+.cat-row { display:flex; align-items:center; gap:.6rem; }
+.cat { width:8rem; }
+.say { position:relative; margin:0; padding:.45rem .9rem; max-width:8rem; border-radius:1rem;
+  background:#eff6ee; color:#001845; font:italic 400 1.15rem/1.2 "Redaction 100", Fraunces, Georgia, serif; }
+.say::before { content:""; position:absolute; left:-.45rem; top:50%; margin-top:-.4rem;
+  border:.4rem solid transparent; border-left:0; border-right-color:#eff6ee; }
+
+.roll { animation:roll 4s ease-in-out infinite alternate; }
+.wv { animation:slide 5s linear infinite; }
+.w2 { animation-duration:7s; animation-direction:reverse; }
+.w3 { animation-duration:4s; }
+.w4 { animation-duration:8s; animation-direction:reverse; }
+.w5 { animation-duration:6s; }
+.w6 { animation-duration:9s; animation-direction:reverse; }
+@keyframes roll { from { transform:translateY(0); } to { transform:translateY(-9px); } }
