@@ -36,6 +36,27 @@ function showHint(detail) {
   detail.replaceChildren(p);
 }
 
+// Amazon India links, matched by book title (so your edited notes stay untouched)
+const bookLinks = {
+  "Thinking, Fast and Slow":
+    "https://www.amazon.in/Thinking-Fast-Slow-Daniel-Kahneman/dp/B0HLQ5XCFH",
+  "How Emotions Are Made":
+    "https://www.amazon.in/How-Emotions-Are-Made-Secret/dp/0544133315",
+  "Emotional Intelligence":
+    "https://www.amazon.in/Emotional-Intelligence-Daniel-Goleman/dp/9382563792",
+  "The Man Who Mistook His Wife for a Hat":
+    "https://www.amazon.in/Man-Who-Mistook-His-Wife/dp/0684853949",
+  Othello: "https://www.amazon.in/Othello-William-Shakespeare/dp/150848046X",
+  "Chokher Bali": "https://www.amazon.in/dp/B0GPQ3KNPL",
+  "Normal People":
+    "https://www.amazon.in/Normal-People-Sally-Rooney-Paperback/dp/B0HKCP2JGM",
+  "To Live": "https://www.amazon.in/Live-Novel-Yu-Hua/dp/1400031869",
+  "The Design of Everyday Things":
+    "https://www.amazon.in/Design-Everyday-Things-Don-Norman/dp/0465050654",
+  "How to Lie with Statistics":
+    "https://www.amazon.in/How-Lie-Statistics-Darrell-Huff/dp/0393310728",
+};
+
 function showBook(detail, book) {
   const title = document.createElement("h3");
   title.textContent = book.dataset.title;
@@ -44,7 +65,20 @@ function showBook(detail, book) {
   by.textContent = "by " + book.dataset.author;
   const note = document.createElement("p");
   note.textContent = book.dataset.note;
-  detail.replaceChildren(title, by, note);
+  const parts = [title, by, note];
+  const url = bookLinks[book.dataset.title];
+  if (url) {
+    const p = document.createElement("p");
+    const a = document.createElement("a");
+    a.className = "buy";
+    a.href = url;
+    a.target = "_blank";
+    a.rel = "noopener";
+    a.textContent = "View on Amazon India (opens in a new tab)";
+    p.append(a);
+    parts.push(p);
+  }
+  detail.replaceChildren(...parts);
 }
 
 document.querySelectorAll(".shelf-section").forEach(function (shelf) {
@@ -88,9 +122,9 @@ const pages = {
     word: "Researcher",
   },
   "reader.html": {
-    bg: "#F3E6CE",
-    fg: "#0147BA",
-    ring: "#E34F33",
+    bg: "#5A86CB",
+    fg: "#6C0820",
+    ring: "#F2AEBC",
     word: "Reader",
   },
 };
@@ -151,4 +185,23 @@ window.addEventListener("pageshow", function (e) {
     document.querySelectorAll(".curtain").forEach(function (c) {
       c.remove();
     });
+});
+
+// Shelf props (a plant, a clock, a cactus) are added to the end of each shelf.
+const props = {
+  minds: `<svg viewBox="0 0 60 100"><g class="sway"><path d="M30 72L22 14L34 72M30 72L38 6L42 72M30 72L10 32L24 72M30 72L52 28L38 72" fill="#3D5D91" stroke="#6C0820" stroke-width="2" stroke-linejoin="round"/></g><path d="M14 70h32l-5 28H19z" fill="#F2AEBC" stroke="#6C0820" stroke-width="2.5" stroke-linejoin="round"/></svg>`,
+  lit: `<svg viewBox="0 0 80 96"><rect x="6" y="56" width="68" height="38" rx="3" fill="#F2AEBC" stroke="#6C0820" stroke-width="2.5"/><rect x="26" y="18" width="30" height="36" rx="8" fill="#F2DCDB" stroke="#6C0820" stroke-width="2.5"/><circle cx="41" cy="36" r="11" fill="none" stroke="#6C0820" stroke-width="2"/><path d="M41 36V28" stroke="#6C0820" stroke-width="2" stroke-linecap="round"/><path class="hand" d="M41 36L47 40" stroke="#6C0820" stroke-width="2" stroke-linecap="round"/></svg>`,
+  makers: `<svg viewBox="0 0 60 96"><path d="M22 70V24a8 8 0 0 1 16 0V70z" fill="#3D5D91" stroke="#6C0820" stroke-width="2"/><path d="M22 54H14a5 5 0 0 1-5-5V40M38 48h8a5 5 0 0 0 5-5V34" fill="none" stroke="#3D5D91" stroke-width="7" stroke-linecap="round"/><path d="M16 68h28l-4 26H20z" fill="#F2AEBC" stroke="#6C0820" stroke-width="2.5" stroke-linejoin="round"/></svg>`,
+};
+document.querySelectorAll(".shelf-section").forEach(function (shelf) {
+  const key = ["minds", "lit", "makers"].find(function (k) {
+    return shelf.classList.contains("shelf-" + k);
+  });
+  const rack = shelf.querySelector(".rack");
+  if (!key || !rack) return;
+  const li = document.createElement("li");
+  li.className = "prop";
+  li.setAttribute("aria-hidden", "true");
+  li.innerHTML = props[key];
+  rack.appendChild(li);
 });

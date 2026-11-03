@@ -1,34 +1,52 @@
-/* Reader newspaper: cream #F3E6CE, blue ink #0147BA, red #E34F33 (dark text on red for contrast) */
-body.reader { --bg:#EBB652; --surface:#EBB652; --ink:#033B55; --muted:#0E65A3;
-  --accent:#F86400; --on-accent:#1b0b08; --line:#0E65A3;
-  background-image:radial-gradient(rgba(1,71,186,.09) 1px,transparent 1.3px); background-size:7px 7px; }
+/* Reader page: wall Silver Lake Blue #5A86CB, paper Misty Rose #F2DCDB, text Burgundy #6C0820,
+   shelves Lapis Lazuli #3D5D91, accents Cherry Blossom Pink #F2AEBC */
+body.reader { --bg:#5A86CB; --surface:#F2DCDB; --ink:#6C0820; --muted:#6C0820;
+  --accent:#3D5D91; --on-accent:#F2DCDB; --line:#6C0820;
+  background-image:radial-gradient(rgba(255,255,255,.14) 1px,transparent 1.3px); background-size:7px 7px; }
 
-.shelf-section { margin:2.2rem 0; }
-.shelf-minds  { --shelf:#0E65A3; --spine-text:#EBB652; }
-.shelf-lit    { --shelf:#F86400; --spine-text:#1b0b08; }
-.shelf-makers { --shelf:#F79500; --spine-text:#033B55; }
-.shelf-section h2 { font:600 1.5rem Fraunces,Georgia,serif; }
-.shelf-section h2::before { content:""; display:inline-block; width:.8em; height:.8em; margin-right:.5rem;
-  background:var(--shelf); border:2px solid var(--ink); }
+/* The newspaper sits on the blue wall like a pinned sheet */
+body.reader main, body.reader .top, body.reader footer { background:#F2DCDB; border:3px solid #3D5D91; margin:1rem auto; }
+body.reader main { padding:1.25rem 1.5rem 2rem; box-shadow:6px 6px 0 rgba(35,20,40,.35); }
+body.reader .top { padding:.6rem 1rem; }
+body.reader footer { padding:1rem 1.5rem; margin-bottom:1.5rem; }
 
-.rack { list-style:none; margin:0; padding:1.8rem 1rem 0; display:flex; flex-wrap:wrap; align-items:flex-end; gap:.45rem;
-  border:2px solid var(--line); border-bottom:14px solid var(--line); border-radius:4px 4px 0 0; }
+/* Each section is a patch of blue wall with a floating shelf */
+.shelf-section { position:relative; margin:2rem 0; padding:1rem 1rem 1.6rem; border:3px solid #3D5D91;
+  background-color:#5A86CB; background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.07) 0 2px,transparent 2px 7px); }
+.shelf-minds  { --shelf:#F2AEBC; --shelf-text:#6C0820; --decor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 80'%3E%3Cpath d='M30 52C16 44 6 32 6 20C20 26 30 38 30 52z' fill='%23F2DCDB' stroke='%236C0820' stroke-width='2' stroke-linejoin='round'/%3E%3Cpath d='M30 52C44 44 54 32 54 20C40 26 30 38 30 52z' fill='%23F2DCDB' stroke='%236C0820' stroke-width='2' stroke-linejoin='round'/%3E%3Cpath d='M30 52C20 36 22 16 28 4C36 18 40 36 30 52z' fill='%23F2DCDB' stroke='%236C0820' stroke-width='2' stroke-linejoin='round'/%3E%3Cpath d='M14 52h32l-4 26H18z' fill='%23F2AEBC' stroke='%236C0820' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E"); }
+.shelf-lit    { --shelf:#6C0820; --shelf-text:#F2DCDB; --decor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'%3E%3Cpath d='M16 50l-4 8M44 50l4 8' fill='none' stroke='%236C0820' stroke-width='2' stroke-linejoin='round'/%3E%3Crect x='6' y='8' width='48' height='42' rx='10' fill='%23F2AEBC' stroke='%236C0820' stroke-width='2' stroke-linejoin='round'/%3E%3Cpath d='M30 29V17M30 29L40 35' fill='none' stroke='%236C0820' stroke-width='2' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E"); }
+.shelf-makers { --shelf:#F2DCDB; --shelf-text:#3D5D91; --decor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 82'%3E%3Crect x='4' y='30' width='11' height='26' rx='5.5' fill='%23F2DCDB' stroke='%236C0820' stroke-width='2' stroke-linejoin='round'/%3E%3Crect x='8' y='50' width='14' height='9' rx='4' fill='%23F2DCDB' stroke='%236C0820' stroke-width='2' stroke-linejoin='round'/%3E%3Crect x='37' y='22' width='11' height='24' rx='5.5' fill='%23F2DCDB' stroke='%236C0820' stroke-width='2' stroke-linejoin='round'/%3E%3Crect x='30' y='38' width='14' height='9' rx='4' fill='%23F2DCDB' stroke='%236C0820' stroke-width='2' stroke-linejoin='round'/%3E%3Crect x='18' y='8' width='16' height='62' rx='8' fill='%23F2DCDB' stroke='%236C0820' stroke-width='2' stroke-linejoin='round'/%3E%3Cpath d='M14 66h24l-3 14H17z' fill='%23F2AEBC' stroke='%236C0820' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E"); }
+.shelf-section h2 { display:inline-block; margin:0 0 .9rem; padding:.2rem .8rem; background:var(--shelf); color:var(--shelf-text);
+  border:2px solid #6C0820; font:600 1.3rem Fraunces,Georgia,serif; transform:rotate(-1.5deg); }
+
+.rack { position:relative; list-style:none; margin:0; padding:2.2rem 1rem 0; display:flex; flex-wrap:wrap; align-items:flex-end; gap:.45rem;
+  border-bottom:16px solid #3D5D91; box-shadow:0 14px 10px -10px rgba(20,20,50,.55); }
+.rack::before { content:""; position:absolute; left:12%; right:12%; bottom:-2.1rem; height:1.5rem;
+  border-left:12px solid #6C0820; border-right:12px solid #6C0820; }      /* the two shelf brackets */
+.rack::after { content:""; position:absolute; right:1.2rem; bottom:0; width:4.2rem; height:5.5rem; pointer-events:none;
+  background:var(--decor) no-repeat center bottom / contain; }              /* plant, clock or cactus */
 .rack li { display:flex; align-items:flex-end; }
 
-.book { writing-mode:vertical-rl; height:var(--h,13rem); width:3.2rem; min-height:0; padding:.7rem .35rem;
-  border:2px solid var(--ink); border-radius:3px 3px 0 0; overflow:hidden; background:var(--shelf); color:var(--spine-text);
-  font:600 .8rem/1.2 Inter,system-ui,sans-serif; text-align:left; cursor:pointer; transform-origin:bottom center;
-  transition:transform .35s cubic-bezier(.2,.8,.2,1);
+/* Book spines */
+.book { --bands:linear-gradient(to bottom,transparent 3%,rgba(35,10,25,.35) 3% 5%,transparent 5% 95%,rgba(35,10,25,.35) 95% 97%,transparent 97%);
+  writing-mode:vertical-rl; height:var(--h,13rem); width:3.2rem; min-height:0; padding:.7rem .35rem; overflow:hidden;
+  border:2px solid #6C0820; border-radius:3px 3px 0 0; background-color:var(--shelf); background-image:var(--bands);
+  color:var(--shelf-text); box-shadow:inset -4px 0 0 rgba(0,0,0,.18); font:600 .8rem/1.2 Inter,system-ui,sans-serif;
+  text-align:left; cursor:pointer; transform-origin:bottom center; transition:transform .35s cubic-bezier(.2,.8,.2,1);
   opacity:0; animation:shelve .5s ease forwards; animation-delay:calc(var(--i,0) * .12s); }
-.book:hover { background:var(--shelf); transform:translateY(-10px); }
-.book:focus-visible { transform:translateY(-10px); }
+.rack li:nth-child(even) .book { background-color:#3D5D91; color:#F2DCDB; }
+.book:hover { background-color:var(--shelf); background-image:var(--bands); transform:translateY(-10px); }
+.rack li:nth-child(even) .book:hover { background-color:#3D5D91; }
+.book:focus-visible { transform:translateY(-10px); outline-color:#6C0820; }
 .book[aria-expanded="true"] { transform:translateY(-26px) rotate(-5deg); }
 @keyframes shelve { from { opacity:0; translate:0 24px; } to { opacity:1; translate:0 0; } }
 
-.detail { margin-top:1.2rem; padding:1rem 1.25rem; min-height:5.5rem; background:var(--shelf); color:var(--spine-text);
-  border:2px solid var(--ink); }
+/* The card that opens when a book is pulled out */
+.detail { margin-top:2.6rem; padding:1rem 1.25rem; min-height:5.5rem; background:var(--shelf); color:var(--shelf-text); border:2px solid #6C0820; }
 .detail > * { animation:fadeup .3s ease; }
 .detail h3 { margin-bottom:.2rem; font-family:Fraunces,Georgia,serif; }
 .detail p { margin:.3rem 0; }
+.detail a.buy { color:inherit; font-weight:700; text-underline-offset:3px; }
 @keyframes fadeup { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:none; } }
+@media (max-width:600px) { .rack::after { display:none; } body.reader main { padding:1rem; } }
 @media (prefers-reduced-motion: reduce) { .book { opacity:1; } }
