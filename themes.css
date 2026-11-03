@@ -57,7 +57,6 @@ body.home { position:relative; overflow-x:hidden; }
 @keyframes bob { from { transform:rotate(24deg) translateY(0); } to { transform:rotate(29deg) translateY(-16px); } }
 @keyframes bob2 { from { transform:translateY(0); } to { transform:translateY(-14px); } }
 @keyframes flow { to { stroke-dashoffset:-48; } }
-@keyframes fly { from { transform:translateX(-10vw); } to { transform:translateX(105vw) translateY(-30px); } }
 @keyframes flap { to { transform:scaleY(.55); } }
 @keyframes eq { from { transform:scaleY(.3); } to { transform:scaleY(1); } }
 @keyframes blink { 50% { opacity:.1; } }
@@ -116,9 +115,56 @@ body.home { position:relative; overflow-x:hidden; }
 /* ---------- Home: thought cloud and flying pages ---------- */
 .thought { width:10rem; height:auto; margin:-.8rem 0 0 -.8rem; align-self:flex-start; animation:bob2 4s ease-in-out infinite alternate; }
 .thought text { font:italic 17px "Redaction 100",Fraunces,Georgia,serif; fill:#001845; }
-.pages i { position:absolute; left:0; top:var(--t); width:3rem; height:4rem; border-radius:3px; opacity:.85;
-  background:repeating-linear-gradient(#eff6ee 0 .5rem,#b9c6dc .5rem .56rem); box-shadow:0 2px 6px rgba(0,0,0,.35);
-  animation:fly var(--s) linear var(--d) infinite, flutter 1.1s ease-in-out infinite alternate; }
-@keyframes fly { from { translate:-8vw 0; rotate:-15deg; } to { translate:108vw -18vh; rotate:40deg; } }
-@keyframes flutter { to { transform:scaleY(.6) skewX(10deg); } }
 @media (prefers-reduced-motion:reduce) { .pages { display:none; } }
+
+/* ---------- Fluid flying pages ---------- */
+.pages i { position:absolute; left:0; top:var(--t); width:0; height:0; animation:glide var(--s) linear var(--d) infinite; }
+.pages i::before { content:""; position:absolute; width:3rem; height:4rem; margin:-2rem 0 0 -1.5rem; border-radius:3px; opacity:.88;
+  background:repeating-linear-gradient(#eff6ee 0 .5rem,#b9c6dc .5rem .56rem); box-shadow:0 2px 6px rgba(0,0,0,.35);
+  animation:sway 3.6s ease-in-out infinite alternate, flutter 1.4s ease-in-out infinite alternate; }
+.pages i:nth-child(2)::before { animation-duration:4.4s,1.1s; width:2.4rem; height:3.2rem; }
+.pages i:nth-child(3)::before { animation-duration:3.1s,1.7s; }
+.pages i:nth-child(4)::before { animation-duration:5s,1.3s; width:2.6rem; height:3.4rem; }
+.pages i:nth-child(5)::before { animation-duration:3.8s,1.5s; }
+.pages i:nth-child(6)::before { animation-duration:4.8s,1.2s; width:3.4rem; height:4.4rem; }
+@keyframes glide { from { translate:-8vw 0; } to { translate:108vw -14vh; } }
+@keyframes sway { from { translate:0 -4vh; rotate:-20deg; } to { translate:0 4vh; rotate:24deg; } }
+@keyframes flutter { from { transform:perspective(300px) rotateX(0deg); } to { transform:perspective(300px) rotateX(60deg); } }
+
+/* ---------- Horizontal DNA ---------- */
+.dna { width:7.85rem; height:17rem; transform:rotate(90deg); margin:-4.6rem auto; }
+
+/* ---------- Cloud over the cat ---------- */
+.cat-row { flex-direction:column-reverse; align-items:flex-start; gap:0; }
+.thought { width:9rem; margin:0 0 -.4rem 2.4rem; }
+
+/* ---------- Home: the three doors as newspapers ---------- */
+.home .door { position:relative; min-height:11rem; padding:.7rem .8rem 3.4rem; background:#eff6ee; color:#001845;
+  border:2px solid #001845; border-radius:2px; box-shadow:5px 5px 0 rgba(0,0,0,.4); transform:rotate(var(--r,-1.2deg));
+  transition:transform .25s, box-shadow .25s, background .25s; }
+.home .door:nth-child(2) { --r:.9deg; } .home .door:nth-child(3) { --r:-.6deg; }
+.home .door::before { content:""; position:absolute; left:50%; top:0; bottom:0; width:1px; background:rgba(0,24,69,.22); }
+.home .door::after { content:""; position:absolute; left:.8rem; right:.8rem; bottom:.8rem; height:2.2rem;
+  background:repeating-linear-gradient(to bottom,rgba(0,24,69,.6) 0 2px,transparent 2px 7px); }
+.home .door:hover { background:#ffffff; color:#001845; transform:rotate(0) translateY(-5px); box-shadow:8px 10px 0 rgba(0,0,0,.4); }
+.paper-date { display:block; text-align:center; margin-bottom:.3rem; color:#001845;
+  font:600 .62rem Inter,system-ui,sans-serif; letter-spacing:.1em; text-transform:uppercase; }
+.home .door-title { display:block; text-align:center; padding:.15rem 0; border-top:3px double #001845; border-bottom:1px solid #001845;
+  font:600 1.5rem Fraunces,Georgia,serif; text-transform:uppercase; }
+.home .door-sub, .home .door:hover .door-sub { display:block; text-align:center; margin-top:.4rem; color:#001845; font:italic .95rem Georgia,serif; }
+
+/* ---------- Home: editor's note ---------- */
+.editor-note { columns:2 16rem; column-gap:2rem; margin:0 0 3rem; padding:1rem 1.2rem 1.2rem; background:#eff6ee; color:#001845;
+  border:2px solid #001845; box-shadow:5px 5px 0 rgba(0,0,0,.4); font-family:Georgia,serif; }
+.editor-note h2 { column-span:all; margin:0 0 .6rem; padding-bottom:.3rem; border-bottom:3px double #001845; font:600 1.6rem Fraunces,Georgia,serif; }
+.editor-note p { margin:.5rem 0; }
+.staff { break-inside:avoid; margin-top:.8rem; padding:.6rem .8rem; border:1px solid #001845; font-size:.9rem; }
+.staff h3 { margin:0 0 .3rem; font:600 .75rem Inter,system-ui,sans-serif; letter-spacing:.14em; text-transform:uppercase; }
+.staff p { margin:.2rem 0; }
+
+/* ---------- Recruiter newspaper (teal) ---------- */
+body.recruiter { background-image:radial-gradient(rgba(4,41,46,.1) 1px,transparent 1.3px); background-size:7px 7px; }
+.recruiter .box.dark { background:#006d77; color:#ffffff; border-color:#04292e; }
+.recruiter .box.dark a { color:#ffffff; }
+.recruiter .box ul { margin:0; padding-left:1.1rem; }
+.recruiter .chips { margin:0 0 1rem; }

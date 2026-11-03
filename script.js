@@ -36,25 +36,26 @@ function showHint(detail) {
   detail.replaceChildren(p);
 }
 
-// Amazon India links, matched by book title (so your edited notes stay untouched)
+// Goodreads links, matched by book title. These are Goodreads searches; swap in a direct book page if you prefer.
 const bookLinks = {
   "Thinking, Fast and Slow":
-    "https://www.amazon.in/Thinking-Fast-Slow-Daniel-Kahneman/dp/B0HLQ5XCFH",
+    "https://www.goodreads.com/search?q=Thinking%2C+Fast+and+Slow+Daniel+Kahneman",
   "How Emotions Are Made":
-    "https://www.amazon.in/How-Emotions-Are-Made-Secret/dp/0544133315",
+    "https://www.goodreads.com/search?q=How+Emotions+Are+Made+Lisa+Feldman+Barrett",
   "Emotional Intelligence":
-    "https://www.amazon.in/Emotional-Intelligence-Daniel-Goleman/dp/9382563792",
+    "https://www.goodreads.com/search?q=Emotional+Intelligence+Daniel+Goleman",
   "The Man Who Mistook His Wife for a Hat":
-    "https://www.amazon.in/Man-Who-Mistook-His-Wife/dp/0684853949",
-  Othello: "https://www.amazon.in/Othello-William-Shakespeare/dp/150848046X",
-  "Chokher Bali": "https://www.amazon.in/dp/B0GPQ3KNPL",
+    "https://www.goodreads.com/search?q=The+Man+Who+Mistook+His+Wife+for+a+Hat+Oliver+Sacks",
+  Othello: "https://www.goodreads.com/search?q=Othello+William+Shakespeare",
+  "Chokher Bali":
+    "https://www.goodreads.com/search?q=Chokher+Bali+Rabindranath+Tagore",
   "Normal People":
-    "https://www.amazon.in/Normal-People-Sally-Rooney-Paperback/dp/B0HKCP2JGM",
-  "To Live": "https://www.amazon.in/Live-Novel-Yu-Hua/dp/1400031869",
+    "https://www.goodreads.com/search?q=Normal+People+Sally+Rooney",
+  "To Live": "https://www.goodreads.com/search?q=To+Live+Yu+Hua",
   "The Design of Everyday Things":
-    "https://www.amazon.in/Design-Everyday-Things-Don-Norman/dp/0465050654",
+    "https://www.goodreads.com/search?q=The+Design+of+Everyday+Things+Don+Norman",
   "How to Lie with Statistics":
-    "https://www.amazon.in/How-Lie-Statistics-Darrell-Huff/dp/0393310728",
+    "https://www.goodreads.com/search?q=How+to+Lie+with+Statistics+Darrell+Huff",
 };
 
 function showBook(detail, book) {
@@ -74,7 +75,7 @@ function showBook(detail, book) {
     a.href = url;
     a.target = "_blank";
     a.rel = "noopener";
-    a.textContent = "View on Amazon India (opens in a new tab)";
+    a.textContent = "Find it on Goodreads (opens in a new tab)";
     p.append(a);
     parts.push(p);
   }
@@ -99,6 +100,159 @@ document.querySelectorAll(".shelf-section").forEach(function (shelf) {
     });
   });
 });
+
+// ---------- Site furniture: live dates, section links, footer link, extras ----------
+// Edit links and wording for this part in one place.
+const SITE = {
+  substack: "https://substack.com/@annareverizes",
+  essay:
+    "https://drive.google.com/file/d/1BV6NUMgt-CB7QgDh8CYKdIqB_8qhXOUC/view?usp=drive_link",
+  sections: [
+    { href: "recruiter.html", label: "Recruiter" },
+    { href: "researcher.html", label: "Researcher" },
+    { href: "reader.html", label: "Reader" },
+  ],
+  substacks: [
+    {
+      name: "Experimental History",
+      by: "Adam Mastroianni",
+      url: "https://www.experimental-history.com",
+      note: "An experimental psychologist thinking hard about unusual ideas.",
+    },
+    {
+      name: "Sean Trott’s newsletter",
+      by: "Sean Trott",
+      url: "https://seantrott.substack.com",
+      note: "Cognitive science research explained by a UC San Diego professor.",
+    },
+  ],
+  editorsNote: [
+    "Why a newspaper? When I was a child, my mother encouraged me to read one. I may have read it, and I may not have. Here I am anyway, because that folded pile of paper might be the place where I first met new ideas: a word I didn’t know, a place I had never been, an argument I had to read twice.",
+    "So this site is a newspaper. Each door above is a section, the date changes every day like a real front page, and the rest is yours to read in any order.",
+  ],
+  staff: [
+    "Editor: Ahana Chanda",
+    "BA English (Honours), Visva-Bharati University, 2025–2029",
+    "Minors: Statistics and Chinese",
+  ],
+};
+
+const now = new Date();
+const dateText = now.toLocaleDateString("en-IN", {
+  weekday: "long",
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+});
+const dayNumber = Math.floor(
+  (now - new Date(now.getFullYear(), 0, 0)) / 86400000,
+);
+const here = location.pathname.split("/").pop() || "index.html";
+
+function el(tag, className, text) {
+  const node = document.createElement(tag);
+  if (className) node.className = className;
+  if (text) node.textContent = text;
+  return node;
+}
+function link(href, text, newTab) {
+  const a = el("a", "", text);
+  a.href = href;
+  if (newTab) {
+    a.target = "_blank";
+    a.rel = "noopener";
+  }
+  return a;
+}
+
+// Every newspaper carries today's date
+document.querySelectorAll(".door").forEach(function (door) {
+  door.prepend(el("span", "paper-date", dateText + " · No. " + dayNumber));
+});
+document.querySelectorAll(".kicker").forEach(function (kicker) {
+  const spans = kicker.querySelectorAll("span");
+  if (spans.length >= 2) {
+    spans[0].textContent = "Vol. 1 · No. " + dayNumber;
+    spans[1].textContent = dateText;
+  }
+});
+
+// Section links on the inner pages, next to "Back to start"
+const back = document.querySelector("main > a.back");
+if (back) {
+  const nav = el("nav", "sections");
+  nav.setAttribute("aria-label", "Sections");
+  nav.append(link("index.html", "← Back to start"));
+  SITE.sections.forEach(function (sec) {
+    if (sec.href !== here) nav.append(link(sec.href, sec.label));
+  });
+  back.replaceWith(nav);
+}
+
+// Substack link in every footer
+const footerLine = document.querySelector("footer p");
+if (footerLine) footerLine.append(" · ", link(SITE.substack, "Substack", true));
+
+// Essay link on the researcher page
+const project = document.querySelector(".researcher .project");
+if (project) {
+  const p = el("p");
+  p.append(
+    link(
+      SITE.essay,
+      "Read the essay (PDF on Google Drive, opens in a new tab)",
+      true,
+    ),
+  );
+  project.append(p);
+}
+
+// Substack recommendations on the reader page
+if (document.body.classList.contains("reader")) {
+  const shelves = document.querySelectorAll(".shelf-section");
+  const last = shelves[shelves.length - 1];
+  if (last) {
+    const wrap = el("section", "subs-wrap");
+    wrap.append(el("p", "label", "Substacks worth a subscription"));
+    const list = el("ul", "subs");
+    SITE.substacks.forEach(function (sub) {
+      const li = el("li");
+      li.append(
+        link(sub.url, sub.name, true),
+        " by " + sub.by + ". " + sub.note,
+      );
+      list.append(li);
+    });
+    wrap.append(list);
+    const mine = el("p");
+    mine.append(
+      "My own writing lives on ",
+      link(SITE.substack, "my Substack", true),
+      ".",
+    );
+    wrap.append(mine);
+    last.after(wrap);
+  }
+}
+
+// Editor's note and staff box on the home page
+if (document.body.classList.contains("home")) {
+  const doors = document.getElementById("doors");
+  if (doors) {
+    const note = el("section", "editor-note");
+    note.append(el("h2", "", "Editor’s note"));
+    SITE.editorsNote.forEach(function (t) {
+      note.append(el("p", "", t));
+    });
+    const staff = el("div", "staff");
+    staff.append(el("h3", "", "The staff box"));
+    SITE.staff.forEach(function (t) {
+      staff.append(el("p", "", t));
+    });
+    note.append(staff);
+    doors.after(note);
+  }
+}
 
 // Page transitions: a coloured circle wipes across the screen, then the next page loads.
 // Colours match each page's background so the join is seamless.
