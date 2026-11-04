@@ -5,12 +5,12 @@ body.home { --bg:#001845; --surface:rgba(239,246,238,.08); --ink:#eff6ee; --mute
 .home .door:hover .door-sub { color: var(--on-accent); }
 
 /* RESEARCHER (newspaper): cream #FCE6C4, clay #DB9577, maroon #700B15 */
-body.researcher { --bg:#FCE6C4; --surface:#FCE6C4; --ink:#700B15; --muted:#700B15;
-  --accent:#700B15; --on-accent:#FCE6C4; --line:#700B15;
+body.researcher { --bg:#D2C7FF; --surface:#D2C7FF; --ink:#0D0D55; --muted:#0D0D55;
+  --accent:#0D0D55; --on-accent:#D2C7FF; --line:#0D0D55;
   background-image:radial-gradient(rgba(112,11,21,.09) 1px,transparent 1.3px); background-size:7px 7px; }
-.researcher .courses { background:#DB9577; }
-.researcher .project { background:#700B15; color:#FCE6C4; }
-.researcher .project a { color:#FCE6C4; }
+.researcher .courses { background:#D9F103; }
+.researcher .project { background:#FF99DC; color:#0D0D55; }
+.researcher .project a { color:#0D0D55; }
 .researcher .courses ul { margin:0; padding-left:1.1rem; }
 .sketch { width:100%; height:auto; color:var(--ink); }
 .desk .arm { transform-origin:36px 100px; animation:type .35s ease-in-out infinite alternate; }
