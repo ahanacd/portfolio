@@ -182,7 +182,7 @@ const back = document.querySelector("main > a.back");
 if (back) {
   const nav = el("nav", "sections");
   nav.setAttribute("aria-label", "Sections");
-  nav.append(link("index.html", "← Back to start"));
+  nav.append(link("index.html", "← Front page"));
   SITE.sections.forEach(function (sec) {
     if (sec.href !== here) nav.append(link(sec.href, sec.label));
   });
@@ -235,6 +235,21 @@ if (document.body.classList.contains("reader")) {
   }
 }
 
+// Intro heading: a sand clock and "Let's get in"
+const who = document.getElementById("who");
+if (who) {
+  who.textContent = "Let’s get in";
+  who.insertAdjacentHTML(
+    "afterbegin",
+    '<svg class="glass" viewBox="0 0 60 90" aria-hidden="true">' +
+      '<path d="M10 6H50M10 84H50" stroke="#eff6ee" stroke-width="5" stroke-linecap="round"/>' +
+      '<polygon class="sand-top" points="16,12 44,12 30,40" fill="#ff9f1c"/>' +
+      '<polygon class="sand-bottom" points="16,80 44,80 30,62" fill="#ff9f1c"/>' +
+      '<line class="sand-line" x1="30" y1="42" x2="30" y2="78" stroke="#ff9f1c" stroke-width="2"/>' +
+      '<path d="M14 8C14 28 28 38 30 45C32 52 46 62 46 82H14C14 62 28 52 30 45C32 38 46 28 46 8Z" fill="none" stroke="#eff6ee" stroke-width="3" stroke-linejoin="round"/></svg>',
+  );
+}
+
 // Editor's note and staff box on the home page
 if (document.body.classList.contains("home")) {
   const doors = document.getElementById("doors");
@@ -254,63 +269,29 @@ if (document.body.classList.contains("home")) {
   }
 }
 
-// Page transitions: a coloured circle wipes across the screen, then the next page loads.
+// Page transitions: a newspaper is thrown onto the screen, then the next page loads.
 // Colours match each page's background so the join is seamless.
 const pages = {
-  "index.html": {
-    bg: "#001845",
-    fg: "#ff9f1c",
-    ring: "#eff6ee",
-    word: "Start",
-  },
-  "recruiter.html": {
-    bg: "#83c5be",
-    fg: "#04292e",
-    ring: "#006d77",
-    word: "Recruiter",
-  },
-  "researcher.html": {
-    bg: "#FCE6C4",
-    fg: "#700B15",
-    ring: "#DB9577",
-    word: "Researcher",
-  },
-  "reader.html": {
-    bg: "#5A86CB",
-    fg: "#6C0820",
-    ring: "#F2AEBC",
-    word: "Reader",
-  },
+  "index.html": { bg: "#001845", word: "The Front Page" },
+  "recruiter.html": { bg: "#F0E6DA", word: "The Hiring Herald" },
+  "researcher.html": { bg: "#FCE6C4", word: "The Research Gazette" },
+  "reader.html": { bg: "#5A86CB", word: "The Reader’s Review" },
 };
 
-function wipe(x, y, page) {
-  const curtain = document.createElement("div");
-  curtain.className = "curtain";
-  curtain.setAttribute("aria-hidden", "true");
-  curtain.style.cssText =
-    "--x:" +
-    x +
-    "px;--y:" +
-    y +
-    "px;--ring:" +
-    page.ring +
-    ";background:" +
-    page.bg +
-    ";color:" +
-    page.fg;
-  const ring1 = document.createElement("span");
-  ring1.className = "ring";
-  const ring2 = document.createElement("span");
-  ring2.className = "ring r2";
-  const word = document.createElement("strong");
-  word.textContent = page.word;
-  curtain.append(ring1, ring2, word);
-  document.body.appendChild(curtain);
-  requestAnimationFrame(function () {
-    requestAnimationFrame(function () {
-      curtain.classList.add("open");
-    });
-  });
+function throwPaper(page) {
+  const layer = el("div", "throw");
+  layer.setAttribute("aria-hidden", "true");
+  layer.style.setProperty("--dest", page.bg);
+  const sheet = el("div", "sheet");
+  sheet.append(
+    el("span", "s-date", dateText),
+    el("strong", "s-name", page.word),
+    el("span", "s-pic"),
+    el("span", "s-cols"),
+    el("span", "s-grid"),
+  );
+  layer.append(sheet);
+  document.body.appendChild(layer);
 }
 
 document.querySelectorAll("a[href]").forEach(function (link) {
@@ -321,22 +302,17 @@ document.querySelectorAll("a[href]").forEach(function (link) {
       return;
     if (matchMedia("(prefers-reduced-motion: reduce)").matches) return; // normal, instant navigation
     e.preventDefault();
-    const r = link.getBoundingClientRect();
-    wipe(
-      e.clientX || r.left + r.width / 2,
-      e.clientY || r.top + r.height / 2,
-      page,
-    );
+    throwPaper(page);
     setTimeout(function () {
       location.href = link.href;
-    }, 750);
+    }, 1000);
   });
 });
 
 // If the visitor presses the browser's Back button, clear any leftover wipe.
 window.addEventListener("pageshow", function (e) {
   if (e.persisted)
-    document.querySelectorAll(".curtain").forEach(function (c) {
+    document.querySelectorAll(".curtain, .throw").forEach(function (c) {
       c.remove();
     });
 });
