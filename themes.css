@@ -17,7 +17,7 @@ body.researcher { --bg:#D2C7FF; --surface:#D2C7FF; --ink:#0D0D55; --muted:#0D0D5
 .desk .scr { animation:blink 2.4s ease-in-out infinite; }
 @keyframes type { to { transform:rotate(-6deg); } }
 .dna { display:block; width:8rem; margin:1rem auto; }
-.rung { stroke:#DB9577; stroke-width:3; transform-box:fill-box; transform-origin:center; animation:twist 2.4s ease-in-out infinite alternate; }
+.rung { stroke:#D9F103; stroke-width:3; transform-box:fill-box; transform-origin:center; animation:twist 2.4s ease-in-out infinite alternate; }
 @keyframes twist { from { transform:scaleX(1); } to { transform:scaleX(.15); } }
 
 /* RECRUITER (newspaper): Butter #FFEDAB, Cherry #75070C, Olive #4F6815, Oat #F0E6DA */
