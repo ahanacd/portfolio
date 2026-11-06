@@ -128,7 +128,7 @@ const SITE = {
   ],
   editorsNote: [
     "Why a newspaper? When I was a child, my mother encouraged me to read one. I may have read it, and I may not have. Here I am anyway, because that folded pile of paper might be the place where I first met new ideas: a word I didn’t know, a place I had never been, an argument I had to read twice.",
-    "So this site is a newspaper. Each door above is a section, the date changes every day like a real front page, and the rest is yours to read in any order.",
+    "So this site is a newspaper. Each newspaper illustration above is a section, it opens into a nespaper front page, and the rest is yours to read in any order.",
   ],
   staff: [
     "Editor: Ahana Chanda",
