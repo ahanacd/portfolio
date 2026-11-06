@@ -182,7 +182,7 @@ const back = document.querySelector("main > a.back");
 if (back) {
   const nav = el("nav", "sections");
   nav.setAttribute("aria-label", "Sections");
-  nav.append(link("index.html", "← Front page"));
+  nav.append(link("index.html", "← Back to intro"));
   SITE.sections.forEach(function (sec) {
     if (sec.href !== here) nav.append(link(sec.href, sec.label));
   });
@@ -235,19 +235,59 @@ if (document.body.classList.contains("reader")) {
   }
 }
 
-// Intro heading: a sand clock and "Let's get in"
-const who = document.getElementById("who");
-if (who) {
-  who.textContent = "Let’s get in";
-  who.insertAdjacentHTML(
-    "afterbegin",
-    '<svg class="glass" viewBox="0 0 60 90" aria-hidden="true">' +
-      '<path d="M10 6H50M10 84H50" stroke="#eff6ee" stroke-width="5" stroke-linecap="round"/>' +
-      '<polygon class="sand-top" points="16,12 44,12 30,40" fill="#ff9f1c"/>' +
-      '<polygon class="sand-bottom" points="16,80 44,80 30,62" fill="#ff9f1c"/>' +
-      '<line class="sand-line" x1="30" y1="42" x2="30" y2="78" stroke="#ff9f1c" stroke-width="2"/>' +
-      '<path d="M14 8C14 28 28 38 30 45C32 52 46 62 46 82H14C14 62 28 52 30 45C32 38 46 28 46 8Z" fill="none" stroke="#eff6ee" stroke-width="3" stroke-linejoin="round"/></svg>',
-  );
+// Link to this site's source code (replaces the placeholder on the recruiter page)
+SITE.repo = "https://github.com/ahanacd/portfolio";
+document
+  .querySelectorAll('a[href="REPLACE-WITH-YOUR-REPO-URL"]')
+  .forEach(function (a) {
+    a.href = SITE.repo;
+    a.target = "_blank";
+    a.rel = "noopener";
+  });
+
+// Researcher page: the DNA sits below the Warli drawing
+const sketchFigure = document.querySelector(".researcher figure");
+const dnaDrawing = document.querySelector(".researcher .dna");
+if (sketchFigure && dnaDrawing) sketchFigure.after(dnaDrawing);
+
+// Intro splash: "Let's get in" with a sand clock, once per visit (going back to the intro page is instant)
+const GLASS_SVG =
+  '<svg class="glass" viewBox="0 0 60 90" aria-hidden="true">' +
+  '<path d="M10 6H50M10 84H50" stroke="#eff6ee" stroke-width="5" stroke-linecap="round"/>' +
+  '<polygon class="sand-top" points="16,12 44,12 30,40" fill="#ff9f1c"/>' +
+  '<polygon class="sand-bottom" points="16,80 44,80 30,62" fill="#ff9f1c"/>' +
+  '<line class="sand-line" x1="30" y1="42" x2="30" y2="78" stroke="#ff9f1c" stroke-width="2"/>' +
+  '<path d="M14 8C14 28 28 38 30 45C32 52 46 62 46 82H14C14 62 28 52 30 45C32 38 46 28 46 8Z" fill="none" stroke="#eff6ee" stroke-width="3" stroke-linejoin="round"/></svg>';
+if (
+  document.body.classList.contains("home") &&
+  !matchMedia("(prefers-reduced-motion: reduce)").matches
+) {
+  let seen = false;
+  try {
+    seen = sessionStorage.getItem("seen-intro") === "1";
+  } catch (e) {
+    /* ignore */
+  }
+  if (!seen) {
+    try {
+      sessionStorage.setItem("seen-intro", "1");
+    } catch (e) {
+      /* ignore */
+    }
+    document.body.classList.add("waiting");
+    const splash = el("div", "letsin");
+    splash.setAttribute("aria-hidden", "true");
+    splash.insertAdjacentHTML("beforeend", GLASS_SVG);
+    splash.append(el("strong", "", "Let’s get in"));
+    document.body.appendChild(splash);
+    setTimeout(function () {
+      splash.classList.add("leave");
+      document.body.classList.remove("waiting");
+    }, 2600);
+    setTimeout(function () {
+      splash.remove();
+    }, 3700);
+  }
 }
 
 // Editor's note and staff box on the home page
@@ -272,9 +312,8 @@ if (document.body.classList.contains("home")) {
 // Page transitions: a newspaper is thrown onto the screen, then the next page loads.
 // Colours match each page's background so the join is seamless.
 const pages = {
-  "index.html": { bg: "#001845", word: "The Front Page" },
   "recruiter.html": { bg: "#F0E6DA", word: "The Hiring Herald" },
-  "researcher.html": { bg: "#FCE6C4", word: "The Research Gazette" },
+  "researcher.html": { bg: "#D2C7FF", word: "The Research Gazette" },
   "reader.html": { bg: "#5A86CB", word: "The Reader’s Review" },
 };
 
